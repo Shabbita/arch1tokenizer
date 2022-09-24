@@ -58,12 +58,14 @@ int main(){
 }
 
 int space_char(char c){
+  //Returns 1 if char is space
   if (c== '\t' || c==' ')
     return 1;
   return 0;
 }
 
 int non_space_char(char c){
+  //Returns 1 if char is not a space
   if (c=='\t' || c==' ')
     return 0;
   return 1;
@@ -129,15 +131,32 @@ char *copy_str(char *inStr, short len){
 }
 
 char **tokenize(char* str){
-  int i;
+  int j=0;
+  int len = 0;
   int count = count_words(str);
-
   char **tokens = malloc(count*sizeof(*str));
-  for(i=0; i<count; i++){
+  
+  for(int i=0; i<count; i++){
     tokens[i] = malloc(20*sizeof(**tokens));
   }
-
-  
+  /*
+  while(*str != '\0'){
+    printf("%c, %p\n", *str, str);
+    str++;
+  }
+  */
+  int i=0;
+  //Calculate len -> print the lenght of each word
+  while(*str != '\0'){
+    if(non_space_char(*str)){
+	len++;
+      }
+    if(space_char(*str)){
+      len = 0;
+    }
+    printf("Lenght word: %d, of %c\n", len, *str);
+    str++;
+  }
   
 
 
