@@ -28,8 +28,8 @@ int main(){
 
     switch(num){
     case 1:
-      //tokens = &...
-      tokenize(str3);
+      tokens = tokenize(str3);
+      printf("Pointer tokens: %p", tokens);
       break;
 
     case 2:
@@ -60,14 +60,12 @@ int main(){
 }
 
 int space_char(char c){
-  //Returns 1 if char is space
   if (c== '\t' || c==' ')
     return 1;
   return 0;
 }
 
 int non_space_char(char c){
-  //Returns 1 if char is not a space
   if (c=='\t' || c==' ')
     return 0;
   return 1;
@@ -80,7 +78,6 @@ char *word_start(char *strPtr){
     while(*temp == ' '){
       temp++;
     }
-    /*printf("\nFirst char is: %c\n", *temp);*/
     return temp;
   }
   return NULL;
@@ -90,8 +87,6 @@ char *word_terminator(char *word){
   char *temp = word;
 
   while(*temp != '\0'){
-    /*printf("%c\n", *temp);
-      printf("%p\n", temp);*/
     temp++;
   }
   return temp;
@@ -120,52 +115,9 @@ char *copy_str(char *inStr, short len){
     newStr[i] = inStr[i];
     i++;
   }
-  /*
-  while(*newStr != '\0'){
-    printf("newStr: %c, %p\n", *newStr, newStr);
-    printf("inSrt: %c, %p\n", *inStr, inStr);
-    newStr++;
-    inStr++;
-  }
-  */
  
   return newStr;
 }
-
-/*char **tokenize(char* str){
-  int j=0;
-  int len = 0;
-  int count = count_words(str);
-  char **tokens = malloc(count*sizeof(*str));
-  
-  for(int i=0; i<count; i++){
-    tokens[i] = malloc(20*sizeof(**tokens));
-  }
-  /*
-  while(*str != '\0'){
-    printf("%c, %p\n", *str, str);
-    str++;
-  }
-*/
-/*
-  int i=0;
-  //Calculate len -> print the lenght of each word
-  while(*str != '\0'){
-    if(non_space_char(*str)){
-	len++;
-      }
-    if(space_char(*str)){
-      len = 0;
-    }
-    printf("Lenght word: %d, of %c\n", len, *str);
-    str++;
-  }
-  
-
-
-  return tokens;
-}
-*/
 
 char **tokenize(char* str){
   int i=0;
@@ -182,12 +134,7 @@ char **tokenize(char* str){
     tokens[i] = (char*)malloc(sizeof(char)*20);
   }
 
-  /*
-  tokens[0][4] = str[0];
-  printf("\ntest tokens[0] = %c\n", tokens[0][4]);
-  tokens[1][2] = str[1];
-  printf("test tokens[1] = %c\n", tokens[1][2]);
-  */
+  /* Store string in tokens */
   i=0;
   while(str[i] != '\0'){ 
     if(non_space_char(str[i])){
@@ -201,6 +148,9 @@ char **tokenize(char* str){
     }
     i++;
     }
+
+  printf("Function tokens pointer: %p", tokens);
+  
   return tokens;
   
 }
