@@ -21,26 +21,29 @@ int main(){
   printf("\nWelcome!\n");
 
   while(free){  /* Loops until user selects Exit */
-    printf("Select a number\n  1. View history.\n  2. Enter a sentence.\n  3. Tokenize a sentence.\n  4. Exit\n  >> ");
+    printf("\nSelect a number\n  1. View history.\n  2. Enter a sentence.\n  3. Tokenize a sentence.\n  4. Exit\n  >> ");
 
     scanf("%d", &num);
     printf("Number: %d\n", num);
 
     switch(num){
-    case 1:
-      tokens = tokenize(str3);
-      printf("Pointer tokens: %p", tokens);
+    case 1:  //View history and select sentence
+
       break;
 
-    case 2:
-      printf("Case 2\n");
+    case 2:  //Enter a sentence
+      printf("\nEnter you new sentence:\n  >> ");
+      scanf(" %[^\n]s", str);
+      printf("Your new sentence is: %s\n", str);
       break;
 
-    case 3:
-      printf("Case 3\n");
+    case 3:  //Tokenize a sentence
+      free(tokens);
+      tokens = tokenize(str);
+      print_tokens(tokens);
       break;
 
-    case 4:
+    case 4:  //Exit
       printf("Exiting...\n");
       exit(0);
 
@@ -125,10 +128,7 @@ char **tokenize(char* str){
   int words = 0;
   int len = 0;
   int count = count_words(str);
-  char **tokens;
-
-  /* Memory of tokens */
-  tokens = (char**)malloc(sizeof(char*)*count);
+  char **tokens = malloc((count+1)*sizeof(char *));
 
   for(i=0; i<=count; i++){
     tokens[i] = (char*)malloc(sizeof(char)*20);
@@ -139,7 +139,6 @@ char **tokenize(char* str){
   while(str[i] != '\0'){ 
     if(non_space_char(str[i])){
       tokens[words][j] = str[i];
-      printf("tokens[%d][%d] = %c\n", words, j, tokens[words][j]);
       j++;
     }
     if(space_char(str[i])){
@@ -149,13 +148,20 @@ char **tokenize(char* str){
     i++;
     }
 
-  printf("Function tokens pointer: %p", tokens);
-  
   return tokens;
   
 }
 
 void print_tokens(char **tokens){
-  
-  
+  int i=0;
+  printf("Tokens: \n");
+  while(*tokens[i] != '\0'){
+    printf("tokens[%d] = %s\n", i, tokens[i]);
+    i++;
+  }
+  printf("tokens[%d] = %s\n", i, tokens[i]);
+}
+
+void free_tokens(char **tokens){
+  free(tokens);
 }
