@@ -17,24 +17,29 @@ int main(){
   int count = count_words(str3);
   char **tokens;
 
+  List *history = init_history();
+
   /* Interface */
   printf("\nWelcome!\n");
 
   while(free){  /* Loops until user selects Exit */
-    printf("\nSelect a number\n  1. View history.\n  2. Enter a sentence.\n  3. Tokenize a sentence.\n  4. Exit\n  >> ");
+    printf("\nSelect a number\n  1. View history and select a sentence.\n  2. Enter a sentence.\n  3. Tokenize a sentence.\n  4. Exit\n  >> ");
 
     scanf("%d", &num);
     printf("Number: %d\n", num);
 
     switch(num){
     case 1:  //View history and select sentence
+      print_history(history);
 
+      //MISSING SELECT A SENTENCE
       break;
 
     case 2:  //Enter a sentence
       printf("\nEnter you new sentence:\n  >> ");
       scanf(" %[^\n]s", str);
       printf("Your new sentence is: %s\n", str);
+      add_history(history, str);
       break;
 
     case 3:  //Tokenize a sentence
@@ -52,15 +57,10 @@ int main(){
     }
   }
 
-  
-  /* Get a string */
-  /* scanf("%[^\n]s", str);
-  /* Prints a string */
-  /*printf("Your string is: %s\n", str);
-  */
-  
   return 0;
 }
+
+/********** Functions **********/
 
 int space_char(char c){
   if (c== '\t' || c==' ')
