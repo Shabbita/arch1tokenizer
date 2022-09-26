@@ -46,8 +46,6 @@ void add_history(List *list, char *str){
     return;
   }
 
-  printf("\nLLEGA AQUI?\n");
-
   tmp = list->root;
   i++;
   
