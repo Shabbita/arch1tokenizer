@@ -11,30 +11,57 @@ List* init_history(){
 
 void add_history(List *list, char *str){
   int i=1;
-
+  Item *tmp = list->root; 
   Item *newNode = (Item *)malloc(sizeof(Item));
-  newNode->str = str;
-  newNode->next = NULL;
-  Item *tmp = list->root;
 
-  printf("list first: %s\n", list->root->str);
-  
   //If list is empty
-  if(tmp==NULL){
-    list->root = newNode;
+  if(tmp->str==NULL){
+    tmp->str = str;
+    tmp->id = i;
+    return;
+  } else {
+    i++;
+    //If not empty
+    printf("Root's string: %s\n", tmp->str);
+
+    while(tmp->next != NULL){
+      tmp=tmp->next;
+      i++;
+    }
+  
+    tmp->next = newNode;
+    newNode->id = i;
+    newNode->str = str;
+  }
+  /*
+  //newNode->str = str;
+  //newNode->next = NULL;
+
+  
+  //If list is empty, save in the root
+  if(list->root->str==NULL){
+    printf("1er nodo\n");
+    list->root->str = str;
     list->root->id = i;
     return;
   }
- 
+
+  printf("\nLLEGA AQUI?\n");
+
+  tmp = list->root;
+  i++;
+  
   //Add to the end of the list
   while(tmp->next != NULL){
-    printf("ADDING..%d. %s\n", tmp->id, tmp->str);
     i++;
+    printf("\nTRAVERSING\n");
     tmp = tmp->next;
   }
 
   tmp->next = newNode;
-  tmp->id = i;
+  tmp->next->id = i;
+  tmp->next->str = str;
+  */
   
 }
 
@@ -45,30 +72,16 @@ void add_history(List *list, char *str){
 void print_history(List *list){
   Item *tmp = list->root;
 
-  Item *newNode = (Item *)malloc(sizeof(Item));
-  newNode->id = 1;
-  newNode->str = "Hola 1";
-
-  Item *newNode2 = (Item *)malloc(sizeof(Item));
-  newNode2->id = 2;
-  newNode2->str = "Hola 2";
-
-  newNode->next = newNode2;
-  newNode2->next = NULL;
-
-  list->root = newNode;
-  
-
   if(list->root->str==NULL){
     printf("Your history list is empty.\n");
     return;
   }
 
-  tmp=list->root;
-
   while(tmp != NULL){
     printf("%d. %s\n", tmp->id, tmp->str);
     tmp = tmp->next;
   }
+
+  printf("\n");
 
 }
