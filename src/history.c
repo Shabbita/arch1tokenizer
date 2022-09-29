@@ -34,33 +34,6 @@ void add_history(List *list, char *str){
     newNode->id = i;
     newNode->str = str;
   }
-  /*
-  //newNode->str = str;
-  //newNode->next = NULL;
-
-  
-  //If list is empty, save in the root
-  if(list->root->str==NULL){
-    printf("1er nodo\n");
-    list->root->str = str;
-    list->root->id = i;
-    return;
-  }
-
-  tmp = list->root;
-  i++;
-  
-  //Add to the end of the list
-  while(tmp->next != NULL){
-    i++;
-    printf("\nTRAVERSING\n");
-    tmp = tmp->next;
-  }
-
-  tmp->next = newNode;
-  tmp->next->id = i;
-  tmp->next->str = str;
-  */
   
 }
 

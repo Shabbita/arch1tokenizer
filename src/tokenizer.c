@@ -29,6 +29,7 @@ int main(){
       //First prints all the history, or "Your history is empty" if linked list is empty
       print_history(history);
 
+      //DONT PRINT IF THE HISTORY IS EMPTY
       //Asks user to select a sentence to get the tokens
       printf("Select a sentence to get tokens.\n  >> ");
       
