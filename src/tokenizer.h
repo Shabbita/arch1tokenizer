@@ -38,10 +38,16 @@ char *copy_str(char *inStr, short len);
 */
 char **tokenize(char* str);
 
+/* Returns the length of the string from the start pointer to the end pointer*/
+//int len_word(char *str);
+
 /* Prints all tokens. */
 void print_tokens(char **tokens);
 
 /* Frees all tokens and the vector containing themx. */
 void free_tokens(char **tokens);
+
+
+
 
 #endif

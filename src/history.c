@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "history.h"
+//#include "tokenizer.c"
 
 List* init_history(){
   List *list = malloc(sizeof(List));
