@@ -38,14 +38,21 @@ void add_history(List *list, char *str){
 }
 
 
-/*char *get_history(List *list, int id){}*/
+char *get_history(List *list, int id){
+  Item *temp = list->root;
+  
+  while(temp->id != id){
+    temp = temp ->next;
+  }
+  return temp->str;
+}
 
 
 void print_history(List *list){
   Item *tmp = list->root;
 
   if(list->root->str==NULL){
-    printf("Your history list is empty.\n");
+    printf("\nYour history list is empty.\n");
     return;
   }
 

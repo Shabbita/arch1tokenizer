@@ -7,11 +7,13 @@ int main(){
   char str[100];                      //Empty char to save string
   char *str2 = "Hello World!";  //TEST
   char *str3 = "hola mundo hello worlds";  //TEST
-  char *strTemp;                      //Empty char pointer to save new sentences
+  char *strTemp = NULL;               //Empty char pointer to save new sentences
+  char *strSelected = NULL;           //Save selected sentence from the history
   int len;                            //Get the length of a string
   
   int num;                            //Save number selected in the interface
-  int count = count_words(str3);
+  int numStr;                         //Save number for the id of the sentence
+  //int count = count_words(str3);
   char **tokens;
   List *history = init_history();
 
@@ -19,27 +21,32 @@ int main(){
   printf("\nWelcome!\n");
 
   while(free){                        //Loops until user selects Exit
-    printf("\nSelect a number\n  1. View history and select a sentence.\n  2. Enter a sentence.\n  3. Tokenize a sentence.\n  4. Exit\n  >> ");
+    printf("\nSelect a number:\n  1. View history and select a sentence.\n  2. Enter a sentence.\n  3. Tokenize a sentence.\n  4. Exit\n  >> ");
     scanf("%d", &num);                //Gets number from the "interface" --> switch cases
-    printf("Number: %d\n", num);      //Recalls selected number to the user
-
+    //printf("Number: %d\n", num);      //Recalls selected number to the user
+     
     switch(num){
     case 1:                           //View history and select sentence
+      printf("\nHistory:\n");
 
       //First prints all the history, or "Your history is empty" if linked list is empty
       print_history(history);
 
-      //DONT PRINT IF THE HISTORY IS EMPTY
-      //Asks user to select a sentence to get the tokens
-      printf("Select a sentence to get tokens.\n  >> ");
-      
+      if(history->root->str != NULL){ //Prints and ask user to select sentence
+	//Asks user to select a sentence to get the tokens
+	printf("Select a sentence to get tokens.\n  >> ");
+	scanf("%d", &numStr);
+	strSelected = get_history(history, numStr);
+	printf("Selected sentence: %s, pointer: %p\n", strSelected, strSelected);
+	printf("\n");
+      }
       
       break;
 
-    case 2:                           //Enter a sentence
+    case 2:                           //Enter a sentence	    
       printf("\nEnter you new sentence:\n  >> ");
       scanf(" %[^\n]s", str);
-      printf("Your new sentence is: %s\n", str);
+      printf("\nYour new sentence is: %s\n", str);
 
       for(len=0; str[len] != '\0'; len++);  //Get the length of the new sentence
 
@@ -51,14 +58,20 @@ int main(){
       break;
 
     case 3:                           //Tokenize a sentence
-      //len = len_word(str2);
-      free(tokens);
-      tokens = tokenize(str);
-      print_tokens(tokens);
+      printf("\nTokens:\n");
+
+      if(strSelected != NULL){
+	printf("Sentence selected: %s, pointer: %p\n", strSelected, strSelected);
+	//free(tokens);
+	tokens = tokenize(strSelected);
+	print_tokens(tokens);
+      } else {
+	printf("No sentence selected.");
+      }
       break;
 
     case 4:                           //Exit
-      printf("Exiting...\n");
+      printf("\nExiting...\n");
       exit(0);
 
     default:                          //Default in case incorrect number
