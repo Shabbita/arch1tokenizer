@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "history.h"
-//#include "tokenizer.c"
 
 List* init_history(){
   List *list = malloc(sizeof(List));
@@ -22,9 +21,7 @@ void add_history(List *list, char *str){
     return;
   } else {
     i++;
-    //If not empty
-    printf("Root's string: %s\n", tmp->str);
-
+    
     while(tmp->next != NULL){
       tmp=tmp->next;
       i++;
@@ -52,7 +49,7 @@ void print_history(List *list){
   Item *tmp = list->root;
 
   if(list->root->str==NULL){
-    printf("\nYour history list is empty.\n");
+    printf("Your history list is empty.\n");
     return;
   }
 
@@ -61,6 +58,5 @@ void print_history(List *list){
     tmp = tmp->next;
   }
 
-  printf("\n");
 
 }
